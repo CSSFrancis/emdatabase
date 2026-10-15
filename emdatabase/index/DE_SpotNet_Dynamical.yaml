@@ -7,10 +7,10 @@ DE_SpotNet_Dynamical:
     center error on dynamical disks and cuts false positives on sparse counted data; on real
     SPED Ag the in-grain strain speckle drops from 0.063 to 0.036 %. An ONNX graph (BatchNorm
     folded, opset 17, dynamic batch/height/width, configuration in the model metadata) for
-    inference with ONNX Runtime; the matching torch checkpoint for training and fine-tuning is
-    de_spotnet_dynamical.pt in the same record. Licensed CC BY-NC 4.0: commercial use (for
-    example, analyzing your own data at a company) is permitted; the weights may not be
-    redistributed in, or incorporated into, software or services that are sold.
+    inference with ONNX Runtime; the torch checkpoint for training and fine-tuning is the
+    DE_SpotNet_Dynamical_Torch entry. Licensed CC BY-NC 4.0: commercial use (for example,
+    analyzing your own data at a company) is permitted; the weights may not be redistributed in,
+    or incorporated into, software or services that are sold.
   source: https://zenodo.org/records/23383572/files
   file: de_spotnet_dynamical.onnx
   license: CC-BY-NC-4.0
