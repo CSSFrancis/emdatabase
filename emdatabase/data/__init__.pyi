@@ -240,23 +240,6 @@ class InSituElectrochemGrowth(DownloadableDataset):
     """
     ...
 
-class LayeredCuNb4DSTEM(DownloadableDataset):
-    """
-    LayeredCuNb4DSTEM
-
-    A 4D-STEM dataset of a layered Cu/Nb nanolaminate, acquired with a nearly parallel 1.58 mrad probe on a Direct Electron CeleritasXS. 128 x 128 probe positions (the central quarter of a 512 x 512 raster scan) of 256 x 256 pixel diffraction patterns, each the sum of 32 camera frames at 25000 fps. Reciprocal space is calibrated at 0.0078768 1/Angstrom per pixel and centred on the direct beam; the detector half-width is 1.008 1/Angstrom (25.3 mrad at 200 kV). The real-space scan step was not recorded by the scan controller, so the navigation axes are in pixels. Gain- and dark-corrected intensities were divided by 2 and rounded to uint16; multiply by 2 to recover ADU.
-
-    DOI: 10.5281/zenodo.21632101
-
-    License: CC-BY-4.0
-
-    You can download this dataset here:
-    https://zenodo.org/records/21632101/files
-
-
-    """
-    ...
-
 class LSMOLineScan(DownloadableDataset):
     """
     LSMOLineScan
@@ -317,16 +300,18 @@ class LSMOSTOLineScanLowLoss(DownloadableDataset):
     """
     ...
 
-class MgONanoCrystals(DownloadableDataset):
+class LayeredCuNb4DSTEM(DownloadableDataset):
     """
-    MgONanoCrystals
+    LayeredCuNb4DSTEM
 
-    A 4D STEM dataset of various MgO nanocrystals
+    A 4D-STEM dataset of a layered Cu/Nb nanolaminate, acquired with a nearly parallel 1.58 mrad probe on a Direct Electron CeleritasXS. 128 x 128 probe positions (the central quarter of a 512 x 512 raster scan) of 256 x 256 pixel diffraction patterns, each the sum of 32 camera frames at 25000 fps. Reciprocal space is calibrated at 0.0078768 1/Angstrom per pixel and centred on the direct beam; the detector half-width is 1.008 1/Angstrom (25.3 mrad at 200 kV). The real-space scan step was not recorded by the scan controller, so the navigation axes are in pixels. Gain- and dark-corrected intensities were divided by 2 and rounded to uint16; multiply by 2 to recover ADU.
+
+    DOI: 10.5281/zenodo.21632101
 
     License: CC-BY-4.0
 
     You can download this dataset here:
-    https://zenodo.org/records/15490547/files
+    https://zenodo.org/records/21632101/files
 
 
     """
@@ -344,6 +329,21 @@ class MOSS6Fig3(DownloadableDataset):
 
     You can download this dataset here:
     https://zenodo.org/records/13958144/files
+
+
+    """
+    ...
+
+class MgONanoCrystals(DownloadableDataset):
+    """
+    MgONanoCrystals
+
+    A 4D STEM dataset of various MgO nanocrystals
+
+    License: CC-BY-4.0
+
+    You can download this dataset here:
+    https://zenodo.org/records/15490547/files
 
 
     """
@@ -472,4 +472,4 @@ class ZrNbPrecipitate(DownloadableDataset):
     """
     ...
 
-__all__ = ['AlNanocrystals', 'AmorphousFilm4nm4DSTEM', 'ApoferritinApollo15eps', 'BilayerWS2', 'CuZnEELSMapping', 'CuZnHAADF', 'DE_CenterNet', 'DE_FriedelNet', 'DE_SpotNet', 'DE_SpotNet_Base16', 'DE_SpotNet_Dynamical', 'DE_SpotNet_Production', 'FeAlStripes', 'HREBSDStrainPatterns', 'InSituElectrochemGrowth', 'LayeredCuNb4DSTEM', 'LSMOLineScan', 'LSMOLineScanLowLoss', 'LSMOSTOLineScan', 'LSMOSTOLineScanLowLoss', 'MgONanoCrystals', 'MOSS6Fig3', 'NiEBSDLarge', 'PdCuSiCrystallization', 'PdNiPGlass', 'PeakDetectionPolymers', 'SPEDAg', 'TutorialUNet', 'TwistedBilayerWSe2Themis', 'ZrNbPrecipitate']
+__all__ = ['AlNanocrystals', 'AmorphousFilm4nm4DSTEM', 'ApoferritinApollo15eps', 'BilayerWS2', 'CuZnEELSMapping', 'CuZnHAADF', 'DE_CenterNet', 'DE_FriedelNet', 'DE_SpotNet', 'DE_SpotNet_Base16', 'DE_SpotNet_Dynamical', 'DE_SpotNet_Production', 'FeAlStripes', 'HREBSDStrainPatterns', 'InSituElectrochemGrowth', 'LSMOLineScan', 'LSMOLineScanLowLoss', 'LSMOSTOLineScan', 'LSMOSTOLineScanLowLoss', 'LayeredCuNb4DSTEM', 'MOSS6Fig3', 'MgONanoCrystals', 'NiEBSDLarge', 'PdCuSiCrystallization', 'PdNiPGlass', 'PeakDetectionPolymers', 'SPEDAg', 'TutorialUNet', 'TwistedBilayerWSe2Themis', 'ZrNbPrecipitate']
