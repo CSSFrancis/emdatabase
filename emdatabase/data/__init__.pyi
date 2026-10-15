@@ -95,6 +95,102 @@ class CuZnHAADF(DownloadableDataset):
     """
     ...
 
+class DE_CenterNet(DownloadableDataset):
+    """
+    DE_CenterNet
+
+    Center refinement for DE SpotNet detections: segments each detected disk in a window of the raw pattern at native resolution and takes the coverage centroid, with a sigma head giving a positional uncertainty. Used for spot radii of 5 px and above; on real GaN it lowers the Friedel error of the detector's centers from 1.13 to 0.84 px. An ONNX graph (BatchNorm folded, opset 17, dynamic batch/height/width, configuration in the model metadata) for inference with ONNX Runtime; the matching torch checkpoint for training and fine-tuning is de_centernet.pt in the same record. Licensed CC BY-NC 4.0: commercial use (for example, analyzing your own data at a company) is permitted; the weights may not be redistributed in, or incorporated into, software or services that are sold.
+
+    DOI: 10.5281/zenodo.23383571
+
+    License: CC-BY-NC-4.0
+
+    Model weights hosted at https://zenodo.org/records/23383572/files; see ``.versions`` for the dated snapshots.
+
+
+    """
+    ...
+
+class DE_FriedelNet(DownloadableDataset):
+    """
+    DE_FriedelNet
+
+    Friedel-partner center refinement, applied after DE CenterNet: reads each disk's window together with the 180-degree-rotated window at its Friedel mirror point, so it sees both dynamical fills of g and -g. Trained on disks of 6-16 px radius and leaves others unchanged. An ONNX graph (BatchNorm folded, opset 17, dynamic batch/height/width, configuration in the model metadata) for inference with ONNX Runtime; the matching torch checkpoint for training and fine-tuning is de_friedelnet.pt in the same record. Licensed CC BY-NC 4.0: commercial use (for example, analyzing your own data at a company) is permitted; the weights may not be redistributed in, or incorporated into, software or services that are sold.
+
+    DOI: 10.5281/zenodo.23383571
+
+    License: CC-BY-NC-4.0
+
+    Model weights hosted at https://zenodo.org/records/23383572/files; see ``.versions`` for the dated snapshots.
+
+
+    """
+    ...
+
+class DE_SpotNet(DownloadableDataset):
+    """
+    DE_SpotNet
+
+    Direct Electron's neural-network diffraction spot (Bragg disk) detector for 4D-STEM and scanning precession electron diffraction, the default detector in SpyDE, pyxem and quantem. Each pattern is rescaled so its disks are about 9 px across (diameter from the autocorrelation) and normalized; the network predicts a peak heat map and a sub-pixel offset. Trained across disk sizes, so it tolerates residual error in the rescale. An ONNX graph (BatchNorm folded, opset 17, dynamic batch/height/width, configuration in the model metadata) for inference with ONNX Runtime; the matching torch checkpoint for training and fine-tuning is de_spotnet.pt in the same record. Licensed CC BY-NC 4.0: commercial use (for example, analyzing your own data at a company) is permitted; the weights may not be redistributed in, or incorporated into, software or services that are sold.
+
+    DOI: 10.5281/zenodo.23383571
+
+    License: CC-BY-NC-4.0
+
+    Model weights hosted at https://zenodo.org/records/23383572/files; see ``.versions`` for the dated snapshots.
+
+
+    """
+    ...
+
+class DE_SpotNet_Base16(DownloadableDataset):
+    """
+    DE_SpotNet_Base16
+
+    Earlier edge-trained DE SpotNet detector, kept as a fallback. An ONNX graph (BatchNorm folded, opset 17, dynamic batch/height/width, configuration in the model metadata) for inference with ONNX Runtime; the matching torch checkpoint for training and fine-tuning is de_spotnet_base16.pt in the same record. Licensed CC BY-NC 4.0: commercial use (for example, analyzing your own data at a company) is permitted; the weights may not be redistributed in, or incorporated into, software or services that are sold.
+
+    DOI: 10.5281/zenodo.23383571
+
+    License: CC-BY-NC-4.0
+
+    Model weights hosted at https://zenodo.org/records/23383572/files; see ``.versions`` for the dated snapshots.
+
+
+    """
+    ...
+
+class DE_SpotNet_Dynamical(DownloadableDataset):
+    """
+    DE_SpotNet_Dynamical
+
+    DE SpotNet fine-tuned on multislice (dynamical) disks with counted and integrating detector noise, then self-trained on real 4D-STEM frames whose labels are persistence- and Friedel- verified. A disk-coverage head centers each disk on its predicted aperture. Halves the center error on dynamical disks and cuts false positives on sparse counted data; on real SPED Ag the in-grain strain speckle drops from 0.063 to 0.036 %. An ONNX graph (BatchNorm folded, opset 17, dynamic batch/height/width, configuration in the model metadata) for inference with ONNX Runtime; the matching torch checkpoint for training and fine-tuning is de_spotnet_dynamical.pt in the same record. Licensed CC BY-NC 4.0: commercial use (for example, analyzing your own data at a company) is permitted; the weights may not be redistributed in, or incorporated into, software or services that are sold.
+
+    DOI: 10.5281/zenodo.23383571
+
+    License: CC-BY-NC-4.0
+
+    Model weights hosted at https://zenodo.org/records/23383572/files; see ``.versions`` for the dated snapshots.
+
+
+    """
+    ...
+
+class DE_SpotNet_Production(DownloadableDataset):
+    """
+    DE_SpotNet_Production
+
+    DE SpotNet variant with short-range-order augmentation and an edge-decoupled head; slightly higher recall on crystalline 4D-STEM at the canonical disk size, weaker off its trained scale. An ONNX graph (BatchNorm folded, opset 17, dynamic batch/height/width, configuration in the model metadata) for inference with ONNX Runtime; the matching torch checkpoint for training and fine-tuning is de_spotnet_production.pt in the same record. Licensed CC BY-NC 4.0: commercial use (for example, analyzing your own data at a company) is permitted; the weights may not be redistributed in, or incorporated into, software or services that are sold.
+
+    DOI: 10.5281/zenodo.23383571
+
+    License: CC-BY-NC-4.0
+
+    Model weights hosted at https://zenodo.org/records/23383572/files; see ``.versions`` for the dated snapshots.
+
+
+    """
+    ...
+
 class FeAlStripes(DownloadableDataset):
     """
     FeAlStripes
@@ -132,6 +228,23 @@ class InSituElectrochemGrowth(DownloadableDataset):
     InSituElectrochemGrowth
 
     An in-situ electrochemistry TEM movie showing growth in a liquid cell, recorded at 300 kV on a Direct Electron DE-Artemis in hardware counting mode. 245 frames of 4096 x 4096 pixels - every 4th frame of a 977 frame movie - with a calibrated 0.45448 nm pixel size and a 0.26208 s interval between saved frames (1.86 x 1.86 micron field of view, 64 s of elapsed time).
+
+    DOI: 10.5281/zenodo.21632101
+
+    License: CC-BY-4.0
+
+    You can download this dataset here:
+    https://zenodo.org/records/21632101/files
+
+
+    """
+    ...
+
+class LayeredCuNb4DSTEM(DownloadableDataset):
+    """
+    LayeredCuNb4DSTEM
+
+    A 4D-STEM dataset of a layered Cu/Nb nanolaminate, acquired with a nearly parallel 1.58 mrad probe on a Direct Electron CeleritasXS. 128 x 128 probe positions (the central quarter of a 512 x 512 raster scan) of 256 x 256 pixel diffraction patterns, each the sum of 32 camera frames at 25000 fps. Reciprocal space is calibrated at 0.0078768 1/Angstrom per pixel and centred on the direct beam; the detector half-width is 1.008 1/Angstrom (25.3 mrad at 200 kV). The real-space scan step was not recorded by the scan controller, so the navigation axes are in pixels. Gain- and dark-corrected intensities were divided by 2 and rounded to uint16; multiply by 2 to recover ADU.
 
     DOI: 10.5281/zenodo.21632101
 
@@ -204,18 +317,16 @@ class LSMOSTOLineScanLowLoss(DownloadableDataset):
     """
     ...
 
-class LayeredCuNb4DSTEM(DownloadableDataset):
+class MgONanoCrystals(DownloadableDataset):
     """
-    LayeredCuNb4DSTEM
+    MgONanoCrystals
 
-    A 4D-STEM dataset of a layered Cu/Nb nanolaminate, acquired with a nearly parallel 1.58 mrad probe on a Direct Electron CeleritasXS. 128 x 128 probe positions (the central quarter of a 512 x 512 raster scan) of 256 x 256 pixel diffraction patterns, each the sum of 32 camera frames at 25000 fps. Reciprocal space is calibrated at 0.0078768 1/Angstrom per pixel and centred on the direct beam; the detector half-width is 1.008 1/Angstrom (25.3 mrad at 200 kV). The real-space scan step was not recorded by the scan controller, so the navigation axes are in pixels. Gain- and dark-corrected intensities were divided by 2 and rounded to uint16; multiply by 2 to recover ADU.
-
-    DOI: 10.5281/zenodo.21632101
+    A 4D STEM dataset of various MgO nanocrystals
 
     License: CC-BY-4.0
 
     You can download this dataset here:
-    https://zenodo.org/records/21632101/files
+    https://zenodo.org/records/15490547/files
 
 
     """
@@ -233,21 +344,6 @@ class MOSS6Fig3(DownloadableDataset):
 
     You can download this dataset here:
     https://zenodo.org/records/13958144/files
-
-
-    """
-    ...
-
-class MgONanoCrystals(DownloadableDataset):
-    """
-    MgONanoCrystals
-
-    A 4D STEM dataset of various MgO nanocrystals
-
-    License: CC-BY-4.0
-
-    You can download this dataset here:
-    https://zenodo.org/records/15490547/files
 
 
     """
@@ -376,4 +472,4 @@ class ZrNbPrecipitate(DownloadableDataset):
     """
     ...
 
-__all__ = ['AlNanocrystals', 'AmorphousFilm4nm4DSTEM', 'ApoferritinApollo15eps', 'BilayerWS2', 'CuZnEELSMapping', 'CuZnHAADF', 'FeAlStripes', 'HREBSDStrainPatterns', 'InSituElectrochemGrowth', 'LSMOLineScan', 'LSMOLineScanLowLoss', 'LSMOSTOLineScan', 'LSMOSTOLineScanLowLoss', 'LayeredCuNb4DSTEM', 'MOSS6Fig3', 'MgONanoCrystals', 'NiEBSDLarge', 'PdCuSiCrystallization', 'PdNiPGlass', 'PeakDetectionPolymers', 'SPEDAg', 'TutorialUNet', 'TwistedBilayerWSe2Themis', 'ZrNbPrecipitate']
+__all__ = ['AlNanocrystals', 'AmorphousFilm4nm4DSTEM', 'ApoferritinApollo15eps', 'BilayerWS2', 'CuZnEELSMapping', 'CuZnHAADF', 'DE_CenterNet', 'DE_FriedelNet', 'DE_SpotNet', 'DE_SpotNet_Base16', 'DE_SpotNet_Dynamical', 'DE_SpotNet_Production', 'FeAlStripes', 'HREBSDStrainPatterns', 'InSituElectrochemGrowth', 'LayeredCuNb4DSTEM', 'LSMOLineScan', 'LSMOLineScanLowLoss', 'LSMOSTOLineScan', 'LSMOSTOLineScanLowLoss', 'MgONanoCrystals', 'MOSS6Fig3', 'NiEBSDLarge', 'PdCuSiCrystallization', 'PdNiPGlass', 'PeakDetectionPolymers', 'SPEDAg', 'TutorialUNet', 'TwistedBilayerWSe2Themis', 'ZrNbPrecipitate']
